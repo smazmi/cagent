@@ -111,11 +111,10 @@ func TestOverrideModel(t *testing.T) {
 // TestExpandCommandPlaceholders tests that $placeholders in commands are expanded with env var values
 func TestExpandCommandPlaceholders(t *testing.T) {
 	tests := []struct {
-		name        string
-		commands    map[string]string
-		envVars     map[string]string
-		expected    map[string]string
-		expectError bool
+		name     string
+		commands map[string]string
+		envVars  map[string]string
+		expected map[string]string
 	}{
 		{
 			name:     "single placeholder",
@@ -163,10 +162,7 @@ func TestExpandCommandPlaceholders(t *testing.T) {
 			// Expand the commands
 			result := expandCommandPlaceholders(t.Context(), tt.commands, env)
 
-			if tt.expectError {
-				t.Fatal("expectError field is no longer supported")
-			}
-			assert.Equal(t, tt.expected, result)
+			require.Equal(t, tt.expected, result)
 		})
 	}
 }
